@@ -4,7 +4,7 @@ const School = require("../../models/School");
 
 const router = express.Router();
 
-router.get("/schools", async (req, res) => {
+router.get("/api/schools", async (req, res) => {
   const schools = await School.find({});
 
   res.send(schools);

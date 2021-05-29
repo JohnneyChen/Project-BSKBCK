@@ -5,7 +5,7 @@ const NotFoundError = require("../../errors/NotFountError");
 
 const router = express.Router();
 
-router.get("/schools/:id", async (req, res) => {
+router.get("/api/schools/:id", async (req, res) => {
   const { id } = req.params;
 
   const school = await School.findById(id);

@@ -3,8 +3,8 @@ const request = require("supertest");
 const School = require("../../../models/School");
 const app = require("../../../app");
 
-it("200s on GET to /schools", async () => {
-  const response = await request(app).get("/schools").expect(200);
+it("200s on GET to /api/schools", async () => {
+  const response = await request(app).get("/api/schools").expect(200);
 });
 
 it("returns list of schools matching database records", async () => {
@@ -13,7 +13,7 @@ it("returns list of schools matching database records", async () => {
   await createSchool("school3");
   await createSchool("school4");
 
-  const response = await request(app).get("/schools");
+  const response = await request(app).get("/api/schools");
 
   expect(response.body.length).toEqual(4);
   expect(response.body[0].name).toEqual("school1");

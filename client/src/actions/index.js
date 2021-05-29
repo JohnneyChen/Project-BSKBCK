@@ -1,19 +1,13 @@
 import axios from "axios";
-import { FETCH_USER, FETCH_BLOGS, FETCH_BLOG } from "./types";
+import { FETCH_SCHOOL, FETCH_SCHOOLS } from "./types";
 
-export const fetchUser = () => async (dispatch) => {
-  const res = await axios.get("/api/current_user");
+export const fetchSchool = (schoolId) => async (dispatch) => {
+  const school = await axios.get(`/api/schools/${schoolId}`);
 
-  dispatch({ type: FETCH_USER, payload: res.data });
+  dispatch({ type: FETCH_SCHOOL, payload: school.data });
 };
 
-export const handleToken = (token) => async (dispatch) => {
-  const res = await axios.post("/api/stripe", token);
-
-  dispatch({ type: FETCH_USER, payload: res.data });
-};
-
-export const submitBlog = (values, file, history) => async (dispatch) => {
+export const postSchool = (values, file, history) => async (dispatch) => {
   const { data } = await axios.get("/api/upload", {
     params: { fileType: file.type },
   });
@@ -24,20 +18,45 @@ export const submitBlog = (values, file, history) => async (dispatch) => {
     },
   });
 
-  const res = await axios.post("/api/blogs", { ...values, imageUrl: data.key });
+  const ret = await axios.post("/api/schools", {
+    ...values,
+    image: data.key,
+  });
 
-  history.push("/blogs");
-  dispatch({ type: FETCH_BLOG, payload: res.data });
+  history.push("/");
+  dispatch({ type: FETCH_SCHOOL, payload: ret.data });
 };
 
-export const fetchBlogs = () => async (dispatch) => {
-  const res = await axios.get("/api/blogs");
+export const editSchool =
+  (schoolId, values, file, history) => async (dispatch) => {
+    if (file) {
+      const { data } = await axios.get("/api/upload", {
+        params: { fileType: file.type },
+      });
 
-  dispatch({ type: FETCH_BLOGS, payload: res.data });
-};
+      await axios.put(data.url, file, {
+        headers: {
+          "Content-Type": file.type,
+        },
+      });
 
-export const fetchBlog = (id) => async (dispatch) => {
-  const res = await axios.get(`/api/blogs/${id}`);
+      const ret = await axios.patch(`/api/schools/${schoolId}`, {
+        ...values,
+        image: data.key,
+      });
 
-  dispatch({ type: FETCH_BLOG, payload: res.data });
+      history.push(`/schools/${schoolId}`);
+      dispatch({ type: FETCH_SCHOOL, payload: ret.data });
+    } else {
+      const res = await axios.patch(`/api/schools/${schoolId}`, values);
+
+      history.push(`/schools/${schoolId}`);
+      dispatch({ type: FETCH_SCHOOL, payload: res.data });
+    }
+  };
+
+export const fetchSchools = () => async (dispatch) => {
+  const response = await axios.get("/api/schools");
+
+  dispatch({ type: FETCH_SCHOOLS, payload: response.data });
 };

@@ -1,3 +1,2 @@
-export const FETCH_USER = 'fetch_user';
-export const FETCH_BLOGS = 'fetch_blogs';
-export const FETCH_BLOG = 'fetch_blog';
+export const FETCH_SCHOOLS = "FETCH_SCHOOLS";
+export const FETCH_SCHOOL = "FETCH_SCHOOL";

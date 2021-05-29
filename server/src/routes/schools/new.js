@@ -7,7 +7,7 @@ const School = require("../../models/School");
 const router = express.Router();
 
 router.post(
-  "/schools",
+  "/api/schools",
   body("name").notEmpty().withMessage("name required"),
   body("image").notEmpty().withMessage("image required"),
   validateReq,

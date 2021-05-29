@@ -6,7 +6,7 @@ const app = require("../../../app");
 
 it("404s on GET to not found record", async () => {
   const id = mongoose.Types.ObjectId().toHexString();
-  const response = await request(app).get(`/schools/${id}`).expect(404);
+  const response = await request(app).get(`/api/schools/${id}`).expect(404);
 });
 
 it("200s and returns fetched record", async () => {
@@ -15,7 +15,7 @@ it("200s and returns fetched record", async () => {
   await createSchool("school3");
   await createSchool("school4");
 
-  const response = await request(app).get(`/schools/${id}`);
+  const response = await request(app).get(`/api/schools/${id}`);
 
   expect(response.body.name).toEqual("school1");
 });

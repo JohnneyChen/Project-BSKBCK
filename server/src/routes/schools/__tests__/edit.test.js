@@ -5,7 +5,10 @@ const School = require("../../../models/School");
 const app = require("../../../app");
 
 it("400s when input is invalid", async () => {
-  const res = await request(app).patch("/schools/asdio").send({}).expect(400);
+  const res = await request(app)
+    .patch("/api/schools/asdio")
+    .send({})
+    .expect(400);
 
   expect(res.body.length).toEqual(1);
   expect(res.body[0].message).toEqual("name required");
@@ -14,7 +17,7 @@ it("400s when input is invalid", async () => {
 it("404s on PATCH to not found record", async () => {
   const id = mongoose.Types.ObjectId().toHexString();
   const response = await request(app)
-    .patch(`/schools/${id}`)
+    .patch(`/api/schools/${id}`)
     .send({
       name: "test",
       image: "placeholder",
@@ -29,7 +32,7 @@ it("200s on successful save and returns new school", async () => {
   const id = await createSchool("school1");
 
   const response = await request(app)
-    .patch(`/schools/${id}`)
+    .patch(`/api/schools/${id}`)
     .send({
       name: "test",
       image: "placeholder",

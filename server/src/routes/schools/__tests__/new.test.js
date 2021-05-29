@@ -4,7 +4,7 @@ const School = require("../../../models/School");
 const app = require("../../../app");
 
 it("400s when input is invalid", async () => {
-  const res = await request(app).post("/schools").send({}).expect(400);
+  const res = await request(app).post("/api/schools").send({}).expect(400);
 
   expect(res.body.length).toEqual(2);
   expect(res.body[0].message).toEqual("name required");
@@ -13,7 +13,7 @@ it("400s when input is invalid", async () => {
 
 it("201s on successful save and returns new school", async () => {
   const res = await request(app)
-    .post("/schools")
+    .post("/api/schools")
     .send({ name: "test", image: "placeholder" })
     .expect(201);
 
@@ -30,7 +30,7 @@ it("201s on successful save and returns new school", async () => {
 
 it("201s on successful save with additional info and returns new school", async () => {
   const res = await request(app)
-    .post("/schools")
+    .post("/api/schools")
     .send({
       name: "test",
       image: "placeholder",

@@ -8,7 +8,7 @@ const NotFoundError = require("../../errors/NotFountError");
 const router = express.Router();
 
 router.patch(
-  "/schools/:id",
+  "/api/schools/:id",
   body("name").notEmpty().withMessage("name required"),
   validateReq,
   async (req, res) => {

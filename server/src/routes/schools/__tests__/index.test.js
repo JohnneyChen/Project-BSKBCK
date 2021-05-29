@@ -3,7 +3,7 @@ const request = require("supertest");
 const School = require("../../../models/School");
 const app = require("../../../app");
 
-it("200s on GET to /", async () => {
+it("200s on GET to /schools", async () => {
   const response = await request(app).get("/schools").expect(200);
 });
 

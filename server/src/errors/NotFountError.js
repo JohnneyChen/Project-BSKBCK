@@ -1,5 +1,6 @@
 class NotFoundError extends Error {
   constructor(type) {
+    super();
     if (type === "route") {
       this.errors = [{ message: "Route not found" }];
     }

@@ -10,7 +10,11 @@ class SchoolShow extends React.Component {
   }
 
   renderDisplay() {
-    return this.props.school ? this.displaySchool() : <p>Loading...</p>;
+    return this.props.school ? (
+      this.displaySchool()
+    ) : (
+      <p>This school doesn't exist yet...</p>
+    );
   }
 
   displaySchool() {

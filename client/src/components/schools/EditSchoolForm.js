@@ -20,7 +20,7 @@ class EditSchoolForm extends React.Component {
 
   render() {
     if (!this.props.school) {
-      return <div>Loading...</div>;
+      return <div>This school doesn't exist yet...</div>;
     }
     return (
       <div>

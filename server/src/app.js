@@ -6,6 +6,7 @@ const schoolIndexRouter = require("./routes/schools/index");
 const schoolNewRouter = require("./routes/schools/new");
 const schoolShowRouter = require("./routes/schools/show");
 const schoolEditRouter = require("./routes/schools/edit");
+const uploadRouter = require("./routes/upload");
 
 const NotFoundError = require("./errors/NotFountError");
 const RequestValidationError = require("./errors/RequestValidationError");
@@ -18,6 +19,7 @@ app.use(schoolIndexRouter);
 app.use(schoolNewRouter);
 app.use(schoolShowRouter);
 app.use(schoolEditRouter);
+app.use(uploadRouter);
 
 app.all("*", (req, res) => {
   throw new NotFoundError("route");

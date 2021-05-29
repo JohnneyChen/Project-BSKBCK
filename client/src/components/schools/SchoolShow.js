@@ -51,12 +51,14 @@ class SchoolShow extends React.Component {
     return (
       <div>
         {this.renderDisplay()}
-        <Link
-          to={`/schools/${this.props.match.params._id}/edit`}
-          className="btn btn-primary btn-large"
-        >
-          Edit post
-        </Link>
+        {this.props.school ? (
+          <Link
+            to={`/schools/${this.props.match.params._id}/edit`}
+            className="btn btn-primary btn-large"
+          >
+            Edit post
+          </Link>
+        ) : null}
       </div>
     );
   }

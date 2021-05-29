@@ -12,7 +12,9 @@ class SchoolList extends React.Component {
 
   renderList() {
     return this.props.schools.length ? (
-      this.props.schools.map((school) => <SchoolPreview school={school} />)
+      this.props.schools.map((school) => (
+        <SchoolPreview key={school._id} school={school} />
+      ))
     ) : (
       <p>No schools yet...</p>
     );

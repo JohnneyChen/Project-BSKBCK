@@ -21,6 +21,16 @@ app.use(schoolShowRouter);
 app.use(schoolEditRouter);
 app.use(uploadRouter);
 
+if (["production"].includes(process.env.NODE_ENV)) {
+  const path = require("path");
+
+  app.use(express.static(path.join(__dirname, "build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "build", "index.html"));
+  });
+}
+
 app.all("*", (req, res) => {
   throw new NotFoundError("route");
 });
